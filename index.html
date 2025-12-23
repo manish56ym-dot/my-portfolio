@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manish | Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <style>
+        :root {
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --text-color: #e2e8f0;
+            --accent-color: #38bdf8;
+            --secondary-color: #94a3b8;
+            --glass-bg: rgba(15, 23, 42, 0.85);
+            --line-color: rgba(255, 255, 255, 0.1);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            overflow-x: hidden;
+        }
+
+        /* --- INTRO OVERLAY --- */
+        .intro-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: #000;
+            z-index: 9999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .intro-text {
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: transparent;
+            -webkit-text-stroke: 1.5px var(--accent-color);
+            opacity: 0;
+        }
+
+        /* --- NAV --- */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 20px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+            backdrop-filter: blur(12px);
+            background: var(--glass-bg);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            opacity: 0;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--accent-color);
+        }
+
+        .nav-links a {
+            color: var(--text-color);
+            text-decoration: none;
+            margin-left: 30px;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-color);
+        }
+
+        /* --- HERO --- */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 100px 10% 0;
+        }
+
+        .hero-content {
+            flex: 1;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .hero h1 span {
+            color: var(--accent-color);
+        }
+
+        .hero p {
+            color: var(--secondary-color);
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .hero-image-container {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            position: relative;
+            opacity: 0;
+            transform: scale(0.8);
+        }
+
+        .profile-img {
+            width: 350px;
+            height: 350px;
+            object-fit: cover;
+            border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+            animation: morph 8s ease-in-out infinite;
+            border: 4px solid var(--accent-color);
+        }
+
+        /* --- CONTACT SECTION --- */
+        .contact-section {
+            padding: 100px 10%;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .email-box {
+            display: inline-flex;
+            align-items: center;
+            background: var(--card-bg);
+            padding: 15px 25px;
+            border-radius: 50px;
+            border: 1px solid var(--line-color);
+            margin: 20px 0;
+            transition: 0.3s;
+        }
+
+        .email-box:hover {
+            border-color: var(--accent-color);
+        }
+
+        .email-text {
+            margin-right: 15px;
+            font-weight: 500;
+        }
+
+        .copy-btn {
+            color: var(--accent-color);
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .copy-btn:hover {
+            transform: scale(1.2);
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .social-icon {
+            font-size: 2.5rem;
+            color: var(--text-color);
+            transition: 0.4s;
+        }
+
+        .social-icon.li:hover {
+            color: #0077b5;
+            transform: translateY(-5px);
+        }
+
+        .social-icon.ig:hover {
+            color: #e1306c;
+            transform: translateY(-5px);
+        }
+
+        /* --- UTILS --- */
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 50px;
+            text-align: center;
+        }
+
+        .section-title span {
+            color: var(--accent-color);
+        }
+
+        @keyframes morph {
+
+            0%,
+            100% {
+                border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+            }
+
+            50% {
+                border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero {
+                flex-direction: column-reverse;
+                text-align: center;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .profile-img {
+                width: 250px;
+                height: 250px;
+            }
+
+            .nav-links {
+                display: none;
+            }
+        }
+
+        .work-card {
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: 0.4s ease;
+            /* This makes them invisible until GSAP wakes them up */
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        /* --- EDUCATION SECTION --- */
+        .education-section {
+            padding: 100px 10%;
+            position: relative;
+            background: transparent;
+        }
+
+        .timeline {
+            position: relative;
+            max-width: 900px;
+            margin: 50px auto;
+        }
+
+        /* The vertical line in the middle */
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 2px;
+            background: rgba(56, 189, 248, 0.2);
+            /* Faint accent color line */
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -1px;
+        }
+
+        .timeline-item {
+            padding: 10px 40px;
+            position: relative;
+            width: 50%;
+            /* Hidden initially for GSAP Animation */
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        /* Positioning left and right cards */
+        .timeline-item.left {
+            left: 0;
+            text-align: right;
+        }
+
+        .timeline-item.right {
+            left: 50%;
+            text-align: left;
+        }
+
+        /* The circle dots on the timeline line */
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            width: 16px;
+            height: 16px;
+            right: -8px;
+            background-color: var(--bg-color);
+            border: 3px solid var(--accent-color);
+            top: 20px;
+            border-radius: 50%;
+            z-index: 1;
+            box-shadow: 0 0 10px var(--accent-color);
+        }
+
+        .timeline-item.right::after {
+            left: -8px;
+        }
+
+        /* --- SKILLS SECTION --- */
+        .skills-section {
+            padding: 100px 10%;
+        }
+
+        .skills-container {
+            max-width: 800px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            /* Two columns */
+            gap: 40px;
+        }
+
+        .skill-item {
+            width: 100%;
+        }
+
+        .skill-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            font-weight: 500;
+        }
+
+        .progress-line {
+            height: 8px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .progress-line .fill {
+            height: 100%;
+            width: 0%;
+            /* Start at 0 for animation */
+            background: var(--accent-color);
+            border-radius: 10px;
+            position: absolute;
+            box-shadow: 0 0 10px var(--accent-color);
+        }
+
+        @media (max-width: 768px) {
+            .skills-container {
+                grid-template-columns: 1fr;
+                /* Single column on mobile */
+            }
+        }
+
+        /* The actual content box */
+        .edu-content {
+            padding: 25px;
+            background: var(--card-bg);
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: 0.3s ease;
+        }
+
+        .edu-content:hover {
+            border-color: var(--accent-color);
+            transform: scale(1.02);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .edu-date {
+            display: block;
+            color: var(--accent-color);
+            font-weight: 700;
+            font-size: 0.9rem;
+            margin-bottom: 8px;
+        }
+
+        .edu-degree {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--text-color);
+            margin-bottom: 5px;
+        }
+
+        .edu-school {
+            font-size: 1rem;
+            color: var(--secondary-color);
+            margin-bottom: 12px;
+        }
+
+        .edu-desc {
+            font-size: 0.9rem;
+            line-height: 1.6;
+            color: var(--secondary-color);
+        }
+
+        /* --- RESPONSIVE MOBILE VIEW --- */
+        @media (max-width: 768px) {
+            .timeline::after {
+                left: 31px;
+                /* Move line to the left on mobile */
+            }
+
+            .timeline-item {
+                width: 100%;
+                padding-left: 70px;
+                padding-right: 25px;
+                text-align: left !important;
+            }
+
+            .timeline-item.left {
+                left: 0 !important;
+            }
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div class="intro-overlay" id="introOverlay">
+        <h1 class="intro-text" id="introText">Welcome to My Profile</h1>
+    </div>
+
+    <nav id="navbar">
+        <div class="logo">MANISH.</div>
+        <div class="nav-links">
+            <a href="#hero">Home</a>
+            <a href="#education">Education</a>
+            <a href="#skills">Skills</a>
+            <a href="#work">Experience</a>
+            <a href="#contact">Contact</a>
+        </div>
+    </nav>
+
+    <section class="hero" id="hero">
+        <div class="hero-content">
+            <h1 class="hero-anim">Hi, I'm <span>Manish</span></h1>
+            <p class="hero-anim">I'm a Data Scientist & Web Developer building high-end digital experiences.</p>
+            <a href="#contact" class="cta-btn hero-anim"
+                style="text-decoration: none; padding: 12px 30px; background: var(--accent-color); color: #000; border-radius: 50px; font-weight: bold; display: inline-block;">Let's
+                Talk</a>
+        </div>
+        <div class="hero-image-container" id="heroImage">
+            <img src="manish_1.jpg" alt="Manish" class="profile-img">
+        </div>
+    </section>
+    <section class="education-section" id="education">
+        <h2 class="section-title">My <span>Education</span></h2>
+        <div class="timeline">
+
+            <div class="timeline-item left">
+                <div class="edu-content">
+                    <span class="edu-date">2026 - 2030</span>
+                    <h3 class="edu-degree">BSc. in Data Science&Applications</h3>
+                    <h4 class="edu-school">IIT Madras</h4>
+                    <p class="edu-desc">Focusing on modern data analysis and machine learning applications.</p>
+                </div>
+            </div>
+
+            <div class="timeline-item right">
+                <div class="edu-content">
+                    <span class="edu-date">2023 - 2025</span>
+                    <h3 class="edu-degree">Higher Secondary</h3>
+                    <h4 class="edu-school">Ganpat Rai Salarpuria Saraswati Vidya Mandir</h4>
+                    <p class="edu-desc">Completed with a focus on Mathematics and Science.</p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+    <section class="skills-section" id="skills">
+        <h2 class="section-title">Technical <span>Skills</span></h2>
+
+        <div class="skills-container">
+            <div class="skill-item">
+                <div class="skill-info">
+                    <span>HTML5 / CSS3</span>
+                    <span>90%</span>
+                </div>
+                <div class="progress-line" data-percent="90%">
+                    <span class="fill"></span>
+                </div>
+            </div>
+
+            <div class="skill-item">
+                <div class="skill-info">
+                    <span>JavaScript (ES6+)</span>
+                    <span>10%</span>
+                </div>
+                <div class="progress-line" data-percent="10%">
+                    <span class="fill"></span>
+                </div>
+            </div>
+
+            <div class="skill-item">
+                <div class="skill-info">
+                    <span>Data Science</span>
+                    <span>15%</span>
+                </div>
+                <div class="progress-line" data-percent="15%">
+                    <span class="fill"></span>
+                </div>
+            </div>
+
+            <div class="skill-item">
+                <div class="skill-info">
+                    <span>Python</span>
+                    <span>50%</span>
+                </div>
+                <div class="progress-line" data-percent="50%">
+                    <span class="fill"></span>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="work-section" id="work">
+        <h2 class="section-title">Work <span>Experience</span></h2>
+        <div class="work-grid">
+            <div class="work-card">
+                <i class="fas fa-briefcase"></i>
+                <span class="work-role">Your Role</span>
+                <span class="work-company">Company Name</span>
+                <p class="work-desc">Your achievements go here.</p>
+                <span class="work-date">2023 - Present</span>
+            </div>
+        </div>
+    </section>
+    <section class="contact-section" id="contact">
+        <h2 class="section-title">Get In <span>Touch</span></h2>
+        <p>I'm currently looking for new opportunities. My inbox is always open!</p>
+
+        <div class="email-box">
+            <span class="email-text">manish.56ym@gmail.com</span>
+            <i class="fas fa-copy copy-btn" onclick="copyEmail()" title="Copy Email"></i>
+        </div>
+
+        <div class="social-links">
+            <a href="https://www.linkedin.com/in/manish-kumar-6b6494358/" target="_blank" class="social-icon li"><i
+                    class="fab fa-linkedin"></i></a>
+            <a href="#" target="_blank" class="social-icon ig"><i class="fab fa-instagram"></i></a>
+        </div>
+    </section>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script>
+        const tl = gsap.timeline();
+
+        // 1. New Intro Animation
+        tl.to("#introText", { opacity: 1, duration: 1.2, ease: "power2.out" })
+            .to("#introText", { opacity: 0, duration: 0.6, delay: 0.8 })
+            .to("#introOverlay", { y: "-100%", duration: 1, ease: "expo.inOut" })
+            .to("#navbar", { opacity: 1, y: 0, duration: 0.5 }, "-=0.5")
+            .to("#heroImage", { opacity: 1, scale: 1, duration: 0.8 }, "-=0.3")
+            .to(".hero-anim", { opacity: 1, y: 0, stagger: 0.2 }, "-=0.5");
+
+        // Copy Email Function
+        function copyEmail() {
+            navigator.clipboard.writeText("manish.56ym@gmail.com");
+            alert("Email copied to clipboard!");
+        }</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+    <script>
+        // Register the plugin (CRITICAL STEP)
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Your existing intro timeline code here...
+
+        // The Work Section Animation
+        gsap.to(".work-card", {
+            scrollTrigger: {
+                trigger: ".work-section",
+                start: "top 80%", // Starts when the section is 80% visible
+                toggleActions: "play none none none"
+            },
+            opacity: 1,
+            y: 0,
+            stagger: 0.2,
+            duration: 0.8,
+            ease: "power2.out"
+        });
+
+        gsap.to(".timeline-item", {
+            scrollTrigger: {
+                trigger: ".timeline",
+                start: "top 80%",
+            },
+            opacity: 1,
+            y: 0,
+            stagger: 0.3,
+            duration: 0.8
+        });
+
+        // Register ScrollTrigger if not already done
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Skill Bars Animation
+        gsap.utils.toArray(".progress-line").forEach(line => {
+            const fill = line.querySelector(".fill");
+            const targetWidth = line.getAttribute("data-percent");
+
+            gsap.to(fill, {
+                scrollTrigger: {
+                    trigger: line,
+                    start: "top 90%", // Start animation when bar is near bottom of screen
+                    toggleActions: "play none none reverse"
+                },
+                width: targetWidth,
+                duration: 1.5,
+                ease: "power2.out"
+            });
+        });
+    </script>
+
+</body>
+
+</html>
